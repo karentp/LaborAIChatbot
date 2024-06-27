@@ -1,0 +1,14 @@
+requests
+beautifulsoup4
+transformers
+sentence-transformers
+langchain
+langchain-huggingface
+ollama
+chromadb
+langchain-chroma
+streamlit
+langchain
+langchain-community 
+fastapi
+uvicorn
