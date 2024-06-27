@@ -112,6 +112,4 @@ LaborAI utiliza tecnologías avanzadas de procesamiento del lenguaje natural (NL
 
 Las contribuciones son bienvenidas. Por favor, cree un fork del repositorio y envíe un pull request con sus cambios.
 
-
-
-Este README proporciona una guía completa sobre cómo instalar, configurar y ejecutar LaborAI, así como una descripción de las herramientas utilizadas y las funcionalidades clave de la aplicación.
+Este proyecto fue elaborado como parte del programa Mil Mujeres en IA proporcionado por la Universidad Tecnica Nacional de Argentina
