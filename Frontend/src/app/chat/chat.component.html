@@ -1,0 +1,65 @@
+<div class="flex flex-col max-h-screen w-[60%] lg:w-[60%] mx-auto mt-12 lg:min-h-screen bg-[#f4f4f4] ">
+  <h1 class="text-2xl font-bold tracking-tight text-[var(--color-violeta)] sm:text-2xl">Chat</h1>
+  
+  <!-- Contenedor mensajitos  -->
+  <div class="flex-1 my-6 px-5 overflow-y-auto">
+    <ul role="list" class="space-y-3">
+      <li *ngFor="let chat of chatHistory" [ngClass]="{'justify-end': chat.type === 'user', 'ml-[20%]': chat.type === 'bot'}" class="flex gap-x-4 w-[80%]">
+        <img *ngIf="chat.type === 'user'" src="../../assets/user.png" alt="" class="relative mt-3 h-6 w-6 flex-none rounded-full bg-gray-50"/>
+        <div [ngClass]="{'ring-[var(--color-violeta)]': chat.type === 'user', 'ring-[var(--color-green)] bg-[var(--color-violeta)]': chat.type === 'bot'}" class="flex-auto rounded-md p-3 ring-1 ring-inset">
+          <div class="flex justify-between gap-x-4">
+            <div class="py-0.5 text-xs leading-5 text-gray-500">
+              <span class="font-medium text-gray-900" *ngIf="chat.type === 'user'">User</span>
+              <span class="font-medium text-[#f4f4f4]" *ngIf="chat.type === 'bot'">LaborAI</span>
+            </div>
+            <time [attr.datetime]="chat.timestamp" class="flex-none py-0.5 text-xs leading-5 text-gray-500">{{chat.timestamp | date:'short'}}</time>
+          </div>
+          <p [ngClass]="{'text-gray-800': chat.type === 'user', 'text-[#f4f4f4]': chat.type === 'bot'}" class="text-sm leading-6">{{chat.text}}</p>
+          
+          <!-- Mostrar el contexto -->
+          <!-- <div *ngIf="chat.context">
+            <h4 class="text-sm font-medium text-gray-900">Context:</h4>
+            <ul class="list-disc pl-5">
+              <li *ngFor="let context of chat.context">
+                <p class="text-xs leading-5 text-gray-700">{{ context }}</p>
+                <div *ngIf="extractArticles(context).length > 0">
+                  <strong class="text-xs leading-5 text-gray-900">Artículos Referenciados:</strong>
+                  <ul class="list-disc pl-5">
+                    <li *ngFor="let article of extractArticles(context)" class="text-xs leading-5 text-gray-700">{{ article }}</li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </div> -->
+        </div>
+        <img *ngIf="chat.type === 'bot'" src="../../assets/logo-sinFondo.png" alt="" class="relative mt-3 h-6 w-8 flex-none"/>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Nuevo comentario/pregunta  -->
+  <div class="sticky bottom-0 p-4 bg-[#f4f4f4]">
+    <div class="flex gap-x-3">
+      <img src="../../assets/logo-sinFondo.png" alt="" class="h-6 w-8 flex-none bg-gray-50"/>
+      <form class="w-full flex flex-row" #form="ngForm" (ngSubmit)="onSubmit(form)">
+        <div class="w-full overflow-hidden cursor-text rounded-lg shadow-sm ring-1 ring-inset ring-[var(--color-violeta)] focus-within:ring-2 focus-within:ring-indigo-600">
+          <label for="question" class="sr-only">Pregunta aquí:</label>
+          <textarea 
+            ngModel rows="1" 
+            name="question" 
+            id="question" 
+            class="block w-full cursor-text resize-none border-0 bg-transparent py-3 text-gray-900 placeholder:text-gray-600 focus:ring-0 sm:text-sm sm:leading-6" 
+            placeholder=""></textarea>
+        </div>
+        <div class="flex items-end my-5 py-2 pl-3 pr-6">
+          <button type="submit" class="rounded-md bg-white mx-2 px-4 py-1.5 text-md font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">Send</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Boton borrar chat -->
+  <div class="sticky bottom-0 p-4 bg-[#f4f4f4]">
+    <button (click)="clearChat()" class="rounded-md bg-pink-500 mx-2 px-4 py-1.5 text-md font-semibold text-white shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-purple-700">Limpiar el Chat</button>
+  </div>
+</div>
